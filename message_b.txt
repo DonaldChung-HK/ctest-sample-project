@@ -1,0 +1,16 @@
+testing message b
+/home/donald/mantid/build/bin/site.py:26: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp  # Avoid import loop in Python 3
+F
+======================================================================
+FAIL: test_flaky (FlakyTest.FlakyTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File \"/home/donald/mantid/Framework/PythonInterface/test/python/plugins/algorithms/FlakyTest.py\", line 7, in test_flaky
+    self.assertEqual(rand, 1)
+AssertionError: 0 != 1
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (failures=1)
