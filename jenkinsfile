@@ -1,0 +1,24 @@
+pipeline {
+	agent any
+
+	stages {
+        stage('Build') {
+            steps {
+                sh """
+				mkdir build && cd build
+                cmake ..
+                make
+                mkdir log
+                ctest -O log/osx-64-ci.log -j3 --output-on-failure --repeat until-pass:5 --no-compress-output --schedule-random
+                ctest -O log/windows-64-ci.log -j3 --output-on-failure --repeat until-pass:5 --no-compress-output --schedule-random
+                ctest -O log/linux-64-ci.log -j3 --output-on-failure --repeat until-pass:5 --no-compress-output --schedule-random
+				"""
+            }
+        }
+	}
+    post {
+        always {
+            archiveArtifacts artifacts: 'build/log/*.log', fingerprint: true
+        }
+    }
+}
